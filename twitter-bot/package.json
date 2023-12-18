@@ -1,0 +1,23 @@
+{
+  "name": "twitter-bot",
+  "version": "1.0.0",
+  "description": "twitter bot to support pressure's nonsense",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pressure101/node-practice.git#main"
+  },
+  "keywords": [
+    "twitter",
+    "bot"
+  ],
+  "author": "Pressure101",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pressure101/node-practice/issues"
+  },
+  "homepage": "https://github.com/pressure101/node-practice/tree/main#readme"
+}
