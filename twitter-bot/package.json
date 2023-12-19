@@ -19,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/pressure101/node-practice/issues"
   },
-  "homepage": "https://github.com/pressure101/node-practice/tree/main#readme"
+  "homepage": "https://github.com/pressure101/node-practice/tree/main#readme",
+  "type": "module"
 }
