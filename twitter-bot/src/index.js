@@ -16,13 +16,17 @@ function adventCode(input) {
 }
 
 function determineNumber(current) { 
+    // replace all word values with numbers
+    current = transformLine(current)
+    console.log(current)
     // extract all the numbers out
     var arrayOfNumbers = current.match(/\d+/g)//.map(function (v){ return +v})
     // build number to return
+    //console.log(arrayOfNumbers)
     if (arrayOfNumbers == null) return 0
     switch(arrayOfNumbers.length) { // 
         case 0:
-            return 0
+            return 0                                             
         case 1: // ['77777']
              return parseInt(arrayOfNumbers[0][0]+giveNumber(arrayOfNumbers[0]))
         case 2:
@@ -33,6 +37,7 @@ function determineNumber(current) {
     }
 }
 
+// return the last digit of the number passed
 function giveNumber(stringOfNum) {
     if(stringOfNum.length === 1) return stringOfNum
     else {
@@ -41,11 +46,47 @@ function giveNumber(stringOfNum) {
     } 
 }
 
+function transformLine(line) {
+    var end = line.length
+    var addLine = ''
+    for (let i = 0 ;i < end; i++) {
+        addLine += line[i]
+        var control = addLine
+        addLine = addLine.replaceAll('one', '1')
+        addLine = addLine.replaceAll('two', '2')
+        addLine = addLine.replaceAll('three', '3')
+        addLine = addLine.replaceAll('four', '4')
+        addLine = addLine.replaceAll('five', '5')
+        addLine = addLine.replaceAll('six', '6')
+        addLine = addLine.replaceAll('seven', '7')
+        addLine = addLine.replaceAll('eight', '8')
+        addLine = addLine.replaceAll('nine', '9')
+        if(control != addLine && i !=0) {
+            addLine = addLine+line[i]
+        }
+    }
+    return addLine
+}
+
+var validStrings = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
 var input = '1abc2\n' +
 'pqr3stu8vw\n' +
 'a1b72c39d4e5\n' +
 'trebuchet' 
+
+var input3 = '1abc2\n' +
+'pqr3stu8vw\n' +
+'a1b72c39d4e5\n' +
+'ttwoone9'
+
+var input4 = 'two1nine\n' +
+'eightwothree\n' +
+'abcone2threexyz\n' +
+'xtwone3four\n' +
+'4nineightseven2\n' +
+'zoneight234\n' +
+'7pqrstsixteen\n'
 
 var input2 = 'sixrrmlkptmc18zhvninek\n' +
 'jcb82eightwond\n' +
