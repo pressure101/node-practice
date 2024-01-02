@@ -18,11 +18,9 @@ function adventCode(input) {
 function determineNumber(current) { 
     // replace all word values with numbers
     current = transformLine(current)
-    console.log(current)
     // extract all the numbers out
     var arrayOfNumbers = current.match(/\d+/g)//.map(function (v){ return +v})
     // build number to return
-    //console.log(arrayOfNumbers)
     if (arrayOfNumbers == null) return 0
     switch(arrayOfNumbers.length) { // 
         case 0:
