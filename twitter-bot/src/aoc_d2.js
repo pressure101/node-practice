@@ -108,28 +108,56 @@ const realInput =
 'Game 99: 3 red, 4 blue; 7 red, 5 blue, 3 green; 2 green, 1 blue, 1 red; 4 blue, 2 green, 1 red; 1 green, 1 red, 2 blue; 1 green, 6 blue, 7 red\n' +
 'Game 100: 2 blue, 10 green; 10 green, 14 red; 3 green, 5 red, 2 blue; 1 red, 3 blue, 7 green; 1 blue, 7 red'
 
-startDayTwo()
 
+const blueLimit = 14
+const redLimit = 12
+const greenLimit = 13
+
+startDayTwo()
 function startDayTwo() {
     // set limits for blocks expected
-    const blueLimit = 14
-    const redLimit = 12
-    const greenLimit = 13
 
-    var inputLines = testInput.split('\n')
+    var inputLines = realInput.split('\n')
     var total = 0
 
     for (var line in inputLines) {
         var numbersInLine = inputLines[line].match(/\d+/g).map(function (v){ return +v})
-        if(checkForLimitBust(numbersInLine)) { total+=numbersInLine[0] }
+        var wordsInLine = inputLines[line].match(/\b(green|blue|red)\b/g)
+        var gameId = numbersInLine[0]
+        // console.log(wordsInLine)
+        if(checkForLimitBust(numbersInLine, wordsInLine)) { 
+            console.log('adding ' + gameId)
+            total+=gameId }
     }
 
     console.log(total)
 }
 
-function checkForLimitBust(arr) {
-    for (var num in arr) {
-        if(arr[num] > 12) return false
+function checkForLimitBust(numArr, wordArr) {
+    numArr.shift()
+    for (var num in numArr) {
+        if(numArr[num] > 12) {
+            switch(wordArr[num]) {
+                case 'blue':
+                     if (numArr[num] > blueLimit) { 
+                        console.log(wordArr[num] + ' hiiii blue ' + numArr[num]) 
+                        return false
+                    }
+                    break
+                case 'red':
+                     if (numArr[num] > redLimit) {
+                        console.log(wordArr[num] + ' hiiii me ' + numArr[num]) 
+                        return false}
+                    break
+                case 'green':
+                     if (numArr[num] > greenLimit) {
+                        console.log(wordArr[num] + ' hiiii you ' + numArr[num]) 
+                        return false}
+                    break
+                default:
+                    break
+            }
+        }
     }
     return true
 }
