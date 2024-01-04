@@ -119,6 +119,7 @@ function startDayTwo() {
 
     var inputLines = realInput.split('\n')
     var total = 0
+    var powers = 0
 
     for (var line in inputLines) {
         var numbersInLine = inputLines[line].match(/\d+/g).map(function (v){ return +v})
@@ -128,9 +129,12 @@ function startDayTwo() {
         if(checkForLimitBust(numbersInLine, wordsInLine)) { 
             console.log('adding ' + gameId)
             total+=gameId }
+        
+        powers += partTwo(numbersInLine, wordsInLine)
     }
 
-    console.log(total)
+    console.log('Part One: ' + total)
+    console.log('Part Two: ' + powers)
 }
 
 function checkForLimitBust(numArr, wordArr) {
@@ -140,18 +144,18 @@ function checkForLimitBust(numArr, wordArr) {
             switch(wordArr[num]) {
                 case 'blue':
                      if (numArr[num] > blueLimit) { 
-                        console.log(wordArr[num] + ' hiiii blue ' + numArr[num]) 
+                        //console.log(wordArr[num] + ' hiiii blue ' + numArr[num]) 
                         return false
                     }
                     break
                 case 'red':
                      if (numArr[num] > redLimit) {
-                        console.log(wordArr[num] + ' hiiii me ' + numArr[num]) 
+                        //console.log(wordArr[num] + ' hiiii me ' + numArr[num]) 
                         return false}
                     break
                 case 'green':
                      if (numArr[num] > greenLimit) {
-                        console.log(wordArr[num] + ' hiiii you ' + numArr[num]) 
+                        //console.log(wordArr[num] + ' hiiii you ' + numArr[num]) 
                         return false}
                     break
                 default:
@@ -160,4 +164,32 @@ function checkForLimitBust(numArr, wordArr) {
         }
     }
     return true
+}
+
+function partTwo(numArray, wordArray) {
+    var redNumbers = []
+    var blueNumbers = []
+    var greenNumbers = []
+
+    for(var num in wordArray) {
+        switch(wordArray[num]) {
+            case 'blue':
+                blueNumbers.push(numArray[num])
+                break
+            case 'red':
+                redNumbers.push(numArray[num])
+                break
+            case 'green':
+                greenNumbers.push(numArray[num])
+                break
+            default:
+                console.log('ugh something went wrong')
+                break
+        }
+    }
+
+    var redHigh = Math.max(...redNumbers)
+    var blueHigh = Math.max(...blueNumbers)
+    var greenHigh = Math.max(...greenNumbers)
+    return redHigh * blueHigh * greenHigh
 }
