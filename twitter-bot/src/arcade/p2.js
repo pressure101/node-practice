@@ -21,7 +21,13 @@ operations.push(Array("ADD_FILE", "file_1"))
 
 function manageStorage(operations) {
     for (var i = 0; i < operations.length; i++) {
-        console.log(operations[i])
+        if(operations[i][0] == "ADD_FILE") {
+            var beforeLength = fileStorage.size
+            console.log(beforeLength != fileStorage.add(operations[i][1]).size) // add returns set, so have to check set length for change
+
+        } else {
+            console.log(fileStorage.delete(operations[i][1])) // delete return boolean by contract
+        }
     }
 }
 
