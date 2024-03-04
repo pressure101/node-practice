@@ -10,6 +10,9 @@ var fileStorage =  new Set()
 // creating operations for testing
 var operations = new Array()
 
+// map to handle location operations
+var memory = new Map()
+
 // adding operations to array
 operations.push(Array("ADD_FILE", "file_1"))
 operations.push(Array("ADD_FILE", "file_1"))
@@ -18,23 +21,26 @@ operations.push(Array("DELETE_FILE", "file_1"))
 operations.push(Array("ADD_FILE", "file_2"))
 operations.push(Array("DELETE_FILE", "file_1"))
 operations.push(Array("ADD_FILE", "file_1"))
+operations.push(Array("COPY_FILE", "file_1", "/dir1"))
 
 function manageStorage(operations) {
     for (var i = 0; i < operations.length; i++) {
-        if(operations[i][0] == "ADD_FILE") {
+        if(operations[i][0] == "ADD_FILE" || operations[i][0] == "COPY_FILE") {
             var beforeLength = fileStorage.size
             console.log(beforeLength != fileStorage.add(operations[i][1]).size) // add returns set, so have to check set length for change
 
-        } else if(operations[i][0] == "DELETE_FILE") {
-            console.log(fileStorage.delete(operations[i][1])) // delete return boolean by contract
         } else {
-            // COPY, 3 element array [operation, file, toLocation]
-            
+            console.log(fileStorage.delete(operations[i][1])) // delete returns boolean by contract
         }
     }
 }
 
+function manageMemory(operations) {
+    console.log("Hey I handle location-based file management!")
+}
+
 manageStorage(operations)
+manageMemory()
 
 // modular rewrite
 
