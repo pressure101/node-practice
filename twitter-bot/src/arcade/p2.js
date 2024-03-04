@@ -36,11 +36,28 @@ function manageStorage(operations) {
 }
 
 function manageMemory(operations) {
+    for(var y = 0; y < operations.length; y++) {
+        var operation = operations[y]
+        var location  = operation.length == 2 ? 'root' : operation[2]
+        var file = operation[1]
+
+        if(operations[y][0] == "ADD_FILE" || operations[y][0] == "COPY_FILE") {
+            if(memory.has(location)) {
+                var entries = memory.get(location)
+                console.log(entries.add(file))
+            } else {
+                console.log(memory.set(location, new Set([file])))
+            }
+        }
+        else { 
+            console.log('delete case!')
+        }
+    }
     console.log("Hey I handle location-based file management!")
 }
 
 manageStorage(operations)
-manageMemory()
+manageMemory(operations)
 
 // modular rewrite
 
