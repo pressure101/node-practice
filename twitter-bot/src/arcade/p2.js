@@ -36,6 +36,7 @@ function manageStorage(operations) {
 }
 
 function manageMemory(operations) {
+    console.log('Starting up memory management!\n')
     for(var y = 0; y < operations.length; y++) {
         var operation = operations[y]
         var location  = operation.length == 2 ? 'root' : operation[2]
@@ -44,9 +45,11 @@ function manageMemory(operations) {
         if(operations[y][0] == "ADD_FILE" || operations[y][0] == "COPY_FILE") {
             if(memory.has(location)) {
                 var entries = memory.get(location)
-                console.log(entries.add(file))
+                var size = entries.size
+                console.log(entries.add(file).size != size)
             } else {
-                console.log(memory.set(location, new Set([file])))
+                memory.set(location, new Set([file]))
+                console.log(true)
             }
         }
         else { 
