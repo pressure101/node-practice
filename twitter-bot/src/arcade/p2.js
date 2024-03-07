@@ -37,6 +37,7 @@ function manageStorage(operations) {
 
 function manageMemory(operations) {
     console.log('Starting up memory management!\n')
+    console.log('Here is the current memory ' + memory.size)
     for(var y = 0; y < operations.length; y++) {
         var operation = operations[y]
         var location  = operation.length == 2 ? 'root' : operation[2]
@@ -53,10 +54,18 @@ function manageMemory(operations) {
             }
         }
         else { 
-            console.log('delete case!')
+            if(memory.has(location)) {
+                var entries = memory.get(location)
+                console.log(entries.delete(file))
+            } else {
+                console.log(false)
+            }
         }
     }
-    console.log("Hey I handle location-based file management!")
+    const itr = memory.entries()
+    for(let entry of itr){
+        console.log(entry)
+    }
 }
 
 manageStorage(operations)
